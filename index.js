@@ -1,14 +1,37 @@
-const ecc = require('tiny-secp256k1')
-const { BIP32Factory } = require('bip32')
-const bip39 = require('bip39');
-const bitcoin = require('bitcoinjs-lib');
 const { generateMnemonicPhrase } =require('./mnemonic');
 const EthereumGenerator = require('./generators/ethereum');
 const BitcoinGenerator = require('./generators/bitcoin');
 
-let mnemonic = process.argv[2];
+let param = process.argv[2];
 
-if(mnemonic===undefined) {
+// fix to check that mnemonics start with vanitygen: and parse number after : symbol
+if(param!==undefined) {
+    params = param.split(':');
+    if(params[0]==='vanitygen') {
+        prefix_count = params[1];
+        // generate prefix
+        prefix = '0x';
+        for(let i=0; i<parseInt(prefix_count); i++) prefix += '0';
+        console.log(`Prefix: ${prefix}`)
+        // generate mnemonics and lookup for address starting with prefix
+        while(true) {
+            mnemonic = generateMnemonicPhrase();
+            const { address } = EthereumGenerator.generateAddress(mnemonic, 0);
+            console.log(`Ethereum address: ${address}`);
+            if(address.startsWith(prefix)) {
+                console.log(`\nMnemonic phrase: ${mnemonic}`);
+                console.log(`Ethereum address: ${address}`);
+                break;
+            }
+        }
+
+        process.exit(0);
+        return;
+    }
+}
+
+// generate new mnemonic phrase and follow base logic
+if(param===undefined) {
     mnemonic  = generateMnemonicPhrase();
     console.log(`Mnemonic phrase: ${mnemonic}\n`);
 }
