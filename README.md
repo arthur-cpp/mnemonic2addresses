@@ -5,8 +5,11 @@ This is a tool to generate and print all HD Ethereum and Bitcoin addresses belon
 ## Usage
 
 ```sh
-git clone https://github.com/apmyp-eth/mnemonic2addresses.git
+git clone https://github.com/arthur-cpp/mnemonic2addresses.git
 cd mnemonic2addresses
 npm i
+# recover
 npm run recover "YOUR_MNEMONIC"
+# generate new
+npm run new
 ```

@@ -1,13 +1,13 @@
 {
   "name": "mnemonic2addresses",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "new": "node index.js",
     "recover": "sh -c 'if [ -z \"$1\" ]; then echo \"Error: No mnemonic provided\" && exit 1; else node index.js \"$1\"; fi' --"
   },
-  "author": "Arthur Valitov, Github: https://github.com/apmyp-eth",
+  "author": "Arthur Valitov, Github: https://github.com/arthur-cpp",
   "license": "MIT",
   "dependencies": {
     "bip32": "^4.0.0",

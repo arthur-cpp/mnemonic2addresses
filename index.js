@@ -21,6 +21,7 @@ for (let i = 0; i < 10; i++) {
     console.log(`${connector} #${i}: ${address}`);
 }
 
+// Bitcoin addresses
 const btc = new BitcoinGenerator(mnemonic);
 const types = ['P2PKH', 'P2SH', 'P2WPKH', 'P2TR'];
 let   typesCounter=0;
